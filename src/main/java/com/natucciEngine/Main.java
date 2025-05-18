@@ -1,13 +1,18 @@
 package com.natucciEngine;
 
+import com.natucciEngine.core.InputParser.ChessInputParser;
+import com.natucciEngine.core.InputParser.Move;
 import com.natucciEngine.entities.Table;
 
 public class Main { 
     private static Table table;
+    private static ChessInputParser inputParser;
 
 	public static void main(String[] args) {
         setTable(new Table());
         getTable().printTable();
+        Move move = ChessInputParser.main();
+        System.out.println(move);
     }
 
 	public static Table getTable() {

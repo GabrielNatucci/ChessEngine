@@ -20,9 +20,6 @@ public class Table {
         }
         setHeavyPiecesList(PieceColorEnum.BLACK);
         setHeavyPiecesList(PieceColorEnum.WHITE);
-
-
-        System.out.println("hello wolrd");
 	}
 
     private void setHeavyPiecesList(PieceColorEnum color) {
@@ -60,10 +57,9 @@ public class Table {
 	}
 
     public void printTable() {
-        System.out.println("------------------------------------");
+        System.out.println("  -------------------");
         for (int i = 0; i < localTable.length; i++) {
-            char letra = StringUtils.converteNumeroPaLetra(i+1);
-            System.out.print(letra + " | ");
+            System.out.print((i-8)*-1 + " | ");
             for (int j = 0; j < localTable.length; j++) {
                 if (localTable[i][j] == null) {
                     System.out.print("-");
@@ -77,7 +73,13 @@ public class Table {
             System.out.println("|");
         }
 
-        System.out.println("    1 2 3 4 5 6 7 8");
-        System.out.println("------------------------------------");
+        System.out.println("  -------------------");
+        System.out.print("    ");
+        for (int i = 0; i < localTable.length; i++) {
+            char letra = StringUtils.converteNumeroPaLetra(i+1);
+            System.out.print(letra + " ");
+        }
+        System.out.println();
+
     }
 }
