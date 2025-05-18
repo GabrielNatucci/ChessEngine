@@ -6,7 +6,6 @@ import com.natucciEngine.entities.Table;
 
 public class Main { 
     private static Table table;
-    private static ChessInputParser inputParser;
 
 	public static void main(String[] args) {
         setTable(new Table());
