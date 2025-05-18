@@ -7,6 +7,7 @@ import com.natucciEngine.entities.pieces.Pawn;
 import com.natucciEngine.entities.pieces.Queen;
 import com.natucciEngine.entities.pieces.Rook;
 import com.natucciEngine.enuns.PieceColorEnum;
+import com.natucciEngine.utils.StringUtils;
 
 public class Table {
     Piece[][] localTable;
@@ -61,7 +62,8 @@ public class Table {
     public void printTable() {
         System.out.println("------------------------------------");
         for (int i = 0; i < localTable.length; i++) {
-            System.out.print("| ");
+            char letra = StringUtils.converteNumeroPaLetra(i+1);
+            System.out.print(letra + " | ");
             for (int j = 0; j < localTable.length; j++) {
                 if (localTable[i][j] == null) {
                     System.out.print("-");
@@ -74,6 +76,8 @@ public class Table {
             }
             System.out.println("|");
         }
+
+        System.out.println("    1 2 3 4 5 6 7 8");
         System.out.println("------------------------------------");
     }
 }
