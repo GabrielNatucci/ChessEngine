@@ -16,4 +16,21 @@ public class Move {
         return String.format("Move[from=(%d,%d), to=(%d,%d)]",
                 fromRow, fromCol, toRow, toCol);
     }
+
+	public int getFromRow() {
+		return fromRow;
+	}
+
+	public int getFromCol() {
+		return fromCol;
+	}
+
+	public int getToRow() {
+		return toRow;
+	}
+
+	public int getToCol() {
+		return toCol;
+	}
+
 }

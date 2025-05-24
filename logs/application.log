@@ -1,0 +1,2 @@
+2025-05-17 23:12:55 [com.natucciEngine.Main.main()] ERROR c.n.c.InputParser.ChessInputParser - Erro: ao parse de movimento do jogador:  Formato inválido. Use algo como "e2 e4".
+2025-05-17 23:13:13 [com.natucciEngine.Main.main()] ERROR c.n.c.InputParser.ChessInputParser - Erro: ao parse de movimento do jogador:  Formato inválido. Use algo como "e2 e4".

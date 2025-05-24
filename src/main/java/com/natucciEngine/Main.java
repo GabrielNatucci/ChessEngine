@@ -12,6 +12,10 @@ public class Main {
         getTable().printTable();
         Move move = ChessInputParser.main();
         System.out.println(move);
+
+        if (getTable().handleMove(move)) {
+            getTable().printTable();
+        }
     }
 
 	public static Table getTable() {
