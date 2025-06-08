@@ -21,10 +21,10 @@ public class Table {
 
     public Table() {
         this.setLocalTable(new Piece[length][height]);
-        for (int i = 0; i < localTable.length; i++) {
-            getLocalTable()[1][i] = new Pawn(PieceColorEnum.BLACK);
-            getLocalTable()[6][i] = new Pawn(PieceColorEnum.WHITE);
-        }
+        // for (int i = 0; i < localTable.length; i++) {
+        //     getLocalTable()[1][i] = new Pawn(PieceColorEnum.BLACK, i, 1);
+        //     getLocalTable()[6][i] = new Pawn(PieceColorEnum.WHITE, i, 6);
+        // }
         setHeavyPiecesList(PieceColorEnum.BLACK);
         setHeavyPiecesList(PieceColorEnum.WHITE);
     }
@@ -38,17 +38,17 @@ public class Table {
             linha = 7;
         }
 
-        getLocalTable()[linha][0] = new Rook(color);
-        getLocalTable()[linha][7] = new Rook(color);
+        getLocalTable()[linha][0] = new Rook(color, 0, linha);
+        getLocalTable()[linha][7] = new Rook(color, 0, linha);
 
-        getLocalTable()[linha][1] = new Knight(color);
-        getLocalTable()[linha][6] = new Knight(color);
+        getLocalTable()[linha][1] = new Knight(color, 1, linha);
+        getLocalTable()[linha][6] = new Knight(color, 6, linha);
 
-        getLocalTable()[linha][2] = new Bishop(color);
-        getLocalTable()[linha][5] = new Bishop(color);
+        getLocalTable()[linha][2] = new Bishop(color, 2, linha);
+        getLocalTable()[linha][5] = new Bishop(color, 5, linha);
 
-        getLocalTable()[linha][3] = new Queen(color);
-        getLocalTable()[linha][4] = new King(color);
+        getLocalTable()[linha][3] = new Queen(color, 3, linha);
+        getLocalTable()[linha][4] = new King(color, 4, linha);
     }
 
     public Table(Piece[][] localTable) {
@@ -95,6 +95,8 @@ public class Table {
         boolean isTargetPieceSameColor = targetPiece == null || targetPiece.getColor() != piece.getColor();
 
         if (piece.isMoveValid(this, move) && isTargetPieceSameColor) {
+            piece.setCol(move.getToCol());
+            piece.setRow(move.getToRow());
             getLocalTable()[move.getFromRow()][move.getFromCol()] = null;
             getLocalTable()[move.getToRow()][move.getToCol()] = piece;
 

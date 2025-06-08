@@ -9,9 +9,11 @@ import com.natucciEngine.enuns.PieceColorEnum;
 import com.natucciEngine.enuns.PiecesEnum;
 
 public class Pawn extends Piece {
-    public Pawn(PieceColorEnum color) {
+    public Pawn(PieceColorEnum color, int col, int row) {
         this.setPiece(PiecesEnum.PAWN);
         this.setColor(color);
+        this.setCol(col);
+        this.setRow(row);
     }
 
 	@Override

@@ -7,9 +7,11 @@ import com.natucciEngine.enuns.PieceColorEnum;
 import com.natucciEngine.enuns.PiecesEnum;
 
 public class Knight extends Piece {
-    public Knight(PieceColorEnum color) {
+    public Knight(PieceColorEnum color, int col, int row) {
         this.setPiece(PiecesEnum.KNIGHT);
         this.setColor(color);
+        this.setCol(col);
+        this.setRow(row);
     }
 
 	@Override

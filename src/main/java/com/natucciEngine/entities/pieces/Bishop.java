@@ -7,15 +7,24 @@ import com.natucciEngine.enuns.PieceColorEnum;
 import com.natucciEngine.enuns.PiecesEnum;
 
 public class Bishop extends Piece {
-    public Bishop(PieceColorEnum color) {
+    public Bishop(PieceColorEnum color, int col, int row) {
         this.setPiece(PiecesEnum.BISHOP);
         this.setColor(color);
+        this.setCol(col);
+        this.setRow(row);
     }
 
     @Override
     public Boolean isMoveValid(Table table, Move move) {
         int diferencaX = Math.abs(move.getFromRow() - move.getToRow());
         int diferencaY = Math.abs(move.getFromCol() - move.getToCol());
+
+        boolean isMoveRow = move.getFromRow() == move.getToRow();
+        boolean isMoveCol = move.getFromCol() == move.getToCol();
+
+        if (isMoveRow || isMoveCol) {
+            return false;
+        }
 
         if (diferencaX / diferencaY != 1) {
             return false;
