@@ -1,20 +1,21 @@
 package com.natucciEngine.entities;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.natucciEngine.core.InputParser.Move;
 import com.natucciEngine.entities.pieces.Bishop;
 import com.natucciEngine.entities.pieces.King;
 import com.natucciEngine.entities.pieces.Knight;
-import com.natucciEngine.entities.pieces.Pawn;
 import com.natucciEngine.entities.pieces.Queen;
 import com.natucciEngine.entities.pieces.Rook;
 import com.natucciEngine.enuns.PieceColorEnum;
-import com.natucciEngine.utils.StringUtils;
+
+import lombok.Getter;
+import lombok.Setter;
 
 public class Table {
-    private static final Logger logger = LoggerFactory.getLogger(Table.class);
+    // private static final Logger logger = LoggerFactory.getLogger(Table.class);
+
+    @Getter
+    @Setter
     Piece[][] localTable;
     public static final int height = 8;
     public static final int length = 8;
@@ -55,40 +56,6 @@ public class Table {
         this.localTable = localTable;
     }
 
-    public Piece[][] getLocalTable() {
-        return localTable;
-    }
-
-    public void setLocalTable(Piece[][] localTable) {
-        this.localTable = localTable;
-    }
-
-    public void printTable() {
-        System.out.println("  -------------------");
-        for (int i = 0; i < localTable.length; i++) {
-            System.out.print((i - 8) * -1 + " | ");
-            for (int j = 0; j < localTable.length; j++) {
-                if (localTable[i][j] == null) {
-                    System.out.print("-");
-                } else if (localTable[i][j].getColor().equals(PieceColorEnum.BLACK)) {
-                    System.out.print(localTable[i][j].getPiece().getDescription().toLowerCase());
-                } else {
-                    System.out.print(localTable[i][j].getPiece().getDescription());
-                }
-                System.out.print(" ");
-            }
-            System.out.println("|");
-        }
-
-        System.out.println("  -------------------");
-        System.out.print("    ");
-        for (int i = 0; i < localTable.length; i++) {
-            char letra = StringUtils.converteNumeroPaLetra(i + 1);
-            System.out.print(letra + " ");
-        }
-        System.out.println();
-    }
-
     public Boolean handleMove(Move move) {
         Piece piece = getLocalTable()[move.getFromRow()][move.getFromCol()];
         Piece targetPiece = getLocalTable()[move.getToRow()][move.getToCol()];
@@ -97,6 +64,7 @@ public class Table {
         if (piece.isMoveValid(this, move) && isTargetPieceSameColor) {
             piece.setCol(move.getToCol());
             piece.setRow(move.getToRow());
+            
             getLocalTable()[move.getFromRow()][move.getFromCol()] = null;
             getLocalTable()[move.getToRow()][move.getToCol()] = piece;
 

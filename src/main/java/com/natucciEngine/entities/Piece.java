@@ -6,50 +6,16 @@ import com.natucciEngine.core.InputParser.Move;
 import com.natucciEngine.enuns.PieceColorEnum;
 import com.natucciEngine.enuns.PiecesEnum;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Piece {
     private PieceColorEnum color;
     private PiecesEnum piece;
     private int col, row;
-
-	public int getRow() {
-		return row;
-	}
-
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-	public int getCol() {
-		return col;
-	}
-
-	public void setCol(int col) {
-		this.col = col;
-	}
-
-	public Piece(PieceColorEnum color) {
-        this.color = color;
-    }
-
-    public Piece() {
-    }
-
-    public PieceColorEnum getColor() {
-        return color;
-    }
-
-    public void setColor(PieceColorEnum color) {
-        this.color = color;
-    }
-
-    public PiecesEnum getPiece() {
-		return piece;
-	}
-
-	public void setPiece(PiecesEnum piece) {
-		this.piece = piece;
-	}
-
+    private boolean hasMoved = false;
 
     public ArrayList<Move> getPossibleMoves(Table table) {
         return null;

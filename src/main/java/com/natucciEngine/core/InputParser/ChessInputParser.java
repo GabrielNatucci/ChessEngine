@@ -61,9 +61,9 @@ public class ChessInputParser {
 
     public static Move main() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Digite seu movimento: ");
+        System.out.print("Digite seu movimento: \n");
         String line = sc.nextLine();
-        sc.close();
+        // sc.close();
 
         try {
             Move move = parseMove(line);

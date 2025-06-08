@@ -1,7 +1,5 @@
 package com.natucciEngine.entities.pieces;
 
-import java.util.ArrayList;
-
 import com.natucciEngine.core.InputParser.Move;
 import com.natucciEngine.entities.Piece;
 import com.natucciEngine.entities.Table;
