@@ -51,7 +51,7 @@ public class Piece {
 	}
 
 
-    public ArrayList<Move> getossibleMoves(Table table) {
+    public ArrayList<Move> getPossibleMoves(Table table) {
         return null;
     }
 

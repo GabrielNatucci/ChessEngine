@@ -87,14 +87,12 @@ public class Table {
             System.out.print(letra + " ");
         }
         System.out.println();
-
     }
 
     public Boolean handleMove(Move move) {
         Piece piece = getLocalTable()[move.getFromRow()][move.getFromCol()];
         Piece targetPiece = getLocalTable()[move.getToRow()][move.getToCol()];
-        // boolean isTargetPieceSameColor = targetPiece == null || targetPiece.getColor() != piece.getColor();
-        boolean isTargetPieceSameColor = true;
+        boolean isTargetPieceSameColor = targetPiece == null || targetPiece.getColor() != piece.getColor();
 
         if (piece.isMoveValid(this, move) && isTargetPieceSameColor) {
             getLocalTable()[move.getFromRow()][move.getFromCol()] = null;
