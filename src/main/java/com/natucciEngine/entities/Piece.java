@@ -15,7 +15,7 @@ public class Piece {
     private PieceColorEnum color;
     private PiecesEnum piece;
     private int col, row;
-    private boolean hasMoved = false;
+    private boolean moved = false;
 
     public ArrayList<Move> getPossibleMoves(Table table) {
         return null;

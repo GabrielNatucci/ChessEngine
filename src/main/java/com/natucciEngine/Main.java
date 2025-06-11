@@ -17,8 +17,7 @@ public class Main {
         setTable(new Table());
         PrintTable.main(getTable());
 
-
-        Move move;;
+        Move move;
         while (true) {
             while (true) {
                 move = ChessInputParser.main();
