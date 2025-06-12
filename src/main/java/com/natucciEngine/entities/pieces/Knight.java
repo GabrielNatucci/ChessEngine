@@ -47,10 +47,12 @@ public class Knight extends Piece {
                 Piece target = table.getLocalTable()[newRow][newCol];
 
                 if (target == null || target.getColor() != this.getColor()) {
-                    // moves.add(new Move(row, col, newRow, newCol));
+                   moves.add(new Move(row, col, newRow, newCol));
                 }
             }
         }
+
+        this.setPossibleMoves(moves);
 
         return moves;
 	}

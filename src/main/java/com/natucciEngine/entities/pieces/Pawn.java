@@ -20,8 +20,10 @@ public class Pawn extends Piece {
     public Boolean isMoveValid(Table table, Move move) {
         if (move.getFromCol() == move.getFromCol()) {
             int diferenca = move.getFromRow() - move.getToRow();
-            if (this.getColor() == PieceColorEnum.BLACK)
+
+            if (this.getColor() == PieceColorEnum.BLACK) {
                 diferenca *= -1;
+            }
 
             return diferenca > 0 && diferenca <= 2;
         }
@@ -65,8 +67,9 @@ public class Pawn extends Piece {
             }
         }
 
-        return moves;
 
+        this.setPossibleMoves(moves);
+        return moves;
     }
 
     private boolean isInsideBoard(int row, int col) {

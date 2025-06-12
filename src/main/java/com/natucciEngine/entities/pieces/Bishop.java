@@ -54,11 +54,12 @@ public class Bishop extends Piece {
     @Override
     public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<Move>();
-        // moves.addAll(generateMovesToTheColumns(table, 1, 1));
-        // moves.addAll(generateMovesToTheColumns(table, 1, -1));
-        // moves.addAll(generateMovesToTheColumns(table, -1, 1));
-        // moves.addAll(generateMovesToTheColumns(table, -1, -1));
+        moves.addAll(generateMovesToTheColumns(table, 1, 1));
+        moves.addAll(generateMovesToTheColumns(table, 1, -1));
+        moves.addAll(generateMovesToTheColumns(table, -1, 1));
+        moves.addAll(generateMovesToTheColumns(table, -1, -1));
 
+        this.setPossibleMoves(moves);
         return moves;
     }
 
@@ -80,6 +81,7 @@ public class Bishop extends Piece {
                 }
                 break;
             }
+
             j += directionY;
         }
 

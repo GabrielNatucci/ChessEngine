@@ -37,8 +37,9 @@ public class Queen extends Piece {
         Piece rook = new Rook(this.getColor(), this.getCol(), this.getRow());
         Piece bishop = new Bishop(this.getColor(), this.getCol(), this.getRow());
 
-        // moves.addAll(rook.getPossibleMoves(table));
-        // moves.addAll(bishop.getPossibleMoves(table));
+        moves.addAll(rook.generatePossibleMoves(table));
+        moves.addAll(bishop.generatePossibleMoves(table));
+        this.setPossibleMoves(moves);
 
         return moves;
     }

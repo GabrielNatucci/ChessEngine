@@ -55,7 +55,7 @@ public class King extends Piece {
     @Override
     public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<Move>();
-        // moves.addAll(generateKingMovesWithCastling(table));
+        moves.addAll(generateKingMovesWithCastling(table));
 
 		return moves;
     }
@@ -115,6 +115,7 @@ public class King extends Piece {
             moves.add(new Move(row, col, row, col - 2)); // e -> g
         }
 
+        this.setPossibleMoves(moves);
         return moves;
     }
 
