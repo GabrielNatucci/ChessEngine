@@ -17,16 +17,6 @@ public class Knight extends Piece {
     }
 
     @Override
-    public Boolean isMoveValid(Table table, Move move) {
-        int diferencaX = Math.abs(move.getFromRow() - move.getToRow());
-        int diferencaY = Math.abs(move.getFromCol() - move.getToCol());
-
-        return diferencaX - diferencaY == 1;
-    }
-
-
-
-    @Override
 	public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<>();
         int[][] directions = {

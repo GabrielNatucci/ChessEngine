@@ -1,6 +1,7 @@
 package com.natucciEngine.entities;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import com.natucciEngine.core.InputParser.Move;
 import com.natucciEngine.enuns.PieceColorEnum;
@@ -19,11 +20,13 @@ public class Piece {
     private ArrayList<Move> possibleMoves;
 
     public ArrayList<Move> generatePossibleMoves(Table table) {
-        ArrayList<Move> moves = new ArrayList<Move>();
-        return moves;
+        return null;
     }
 
     public Boolean isMoveValid(Table table, Move move) {
-        return null;
+        return this.getPossibleMoves().stream().filter(movec -> {
+            return move.equals(movec);
+        }).collect(Collectors.toList())
+                .size() == 1;
     }
 }

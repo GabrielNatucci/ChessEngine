@@ -17,42 +17,6 @@ public class King extends Piece {
     }
 
     @Override
-    public Boolean isMoveValid(Table table, Move move) {
-        int diferencaX = move.getFromRow() - move.getToRow();
-        int diferencaY = move.getToCol() - move.getFromCol();
-
-        if (diferencaY == 2 &&
-                table.getLocalTable()[move.getFromRow()][7] != null &&
-                table.getLocalTable()[move.getFromRow()][7].getPiece().equals(PiecesEnum.ROOK) &&
-                !table.getLocalTable()[move.getFromRow()][7].isMoved() &&
-                table.getLocalTable()[move.getFromRow()][6] == null &&
-                table.getLocalTable()[move.getFromRow()][5] == null) {
-
-            Piece rook = table.getLocalTable()[move.getFromRow()][7];
-            table.getLocalTable()[move.getFromRow()][7] = null;
-            table.getLocalTable()[move.getFromRow()][5] = rook;
-            return true;
-        }
-
-        if (diferencaY == -2 &&
-                table.getLocalTable()[move.getFromRow()][0] != null &&
-                table.getLocalTable()[move.getFromRow()][0].getPiece().equals(PiecesEnum.ROOK) &&
-                !table.getLocalTable()[move.getFromRow()][0].isMoved() &&
-                table.getLocalTable()[move.getFromRow()][1] == null &&
-                table.getLocalTable()[move.getFromRow()][2] == null) {
-
-            Piece rook = table.getLocalTable()[move.getFromRow()][0];
-            table.getLocalTable()[move.getFromRow()][0] = null;
-            table.getLocalTable()[move.getFromRow()][3] = rook;
-            return true;
-        }
-
-        diferencaX = Math.abs(diferencaX);
-        diferencaY = Math.abs(diferencaY);
-        return diferencaY == 1 || diferencaX == 1 || diferencaY == 0 || diferencaX == 0;
-    }
-
-    @Override
     public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<Move>();
         moves.addAll(generateKingMovesWithCastling(table));

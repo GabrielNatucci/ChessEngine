@@ -17,21 +17,6 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public Boolean isMoveValid(Table table, Move move) {
-        if (move.getFromCol() == move.getFromCol()) {
-            int diferenca = move.getFromRow() - move.getToRow();
-
-            if (this.getColor() == PieceColorEnum.BLACK) {
-                diferenca *= -1;
-            }
-
-            return diferenca > 0 && diferenca <= 2;
-        }
-
-        return false;
-    }
-
-    @Override
     public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<>();
         Piece[][] board = table.getLocalTable();

@@ -17,41 +17,6 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public Boolean isMoveValid(Table table, Move move) {
-        int diferencaX = Math.abs(move.getFromRow() - move.getToRow());
-        int diferencaY = Math.abs(move.getFromCol() - move.getToCol());
-
-        boolean isMoveRow = move.getFromRow() == move.getToRow();
-        boolean isMoveCol = move.getFromCol() == move.getToCol();
-
-        if (isMoveRow || isMoveCol) {
-            return false;
-        }
-
-        if (diferencaX / diferencaY != 1) {
-            return false;
-        }
-
-        int multiplierY = move.getFromCol() > move.getToCol() ? -1 : 1;
-        int multiplierX = move.getFromRow() > move.getToRow() ? -1 : 1;
-        int j = move.getFromCol() + multiplierY;
-        int i = move.getFromRow() + multiplierX;
-
-        for (; i != move.getToRow() || j != move.getToCol();) {
-            Piece localPiece = table.getLocalTable()[i][j];
-
-            if (localPiece != null) {
-                return false;
-            }
-
-            i += (1 * multiplierX);
-            j += (1 * multiplierY);
-        }
-
-        return true;
-    }
-
-    @Override
     public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<Move>();
         moves.addAll(generateMovesToTheColumns(table, 1, 1));

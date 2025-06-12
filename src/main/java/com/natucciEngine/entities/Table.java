@@ -10,6 +10,7 @@ import com.natucciEngine.entities.pieces.Pawn;
 import com.natucciEngine.entities.pieces.Queen;
 import com.natucciEngine.entities.pieces.Rook;
 import com.natucciEngine.enuns.PieceColorEnum;
+import com.natucciEngine.enuns.PiecesEnum;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -73,7 +74,7 @@ public class Table {
                 if (piece == null)
                     continue;
 
-                piece.getPossibleMoves(this)
+                piece.generatePossibleMoves(this)
                         .stream()
                         .filter(Objects::nonNull)
                         .forEach(move -> {
