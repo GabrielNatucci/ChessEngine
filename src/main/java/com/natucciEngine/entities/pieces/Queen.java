@@ -32,7 +32,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    public ArrayList<Move> getPossibleMoves(Table table) {
+    public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<Move>();
         Piece rook = new Rook(this.getColor(), this.getCol(), this.getRow());
         Piece bishop = new Bishop(this.getColor(), this.getCol(), this.getRow());

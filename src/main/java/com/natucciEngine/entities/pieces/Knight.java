@@ -27,7 +27,7 @@ public class Knight extends Piece {
 
 
     @Override
-	public ArrayList<Move> getPossibleMoves(Table table) {
+	public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<>();
         int[][] directions = {
                 { -2, -1 }, { -2, +1 }, // cima esquerda / cima direita

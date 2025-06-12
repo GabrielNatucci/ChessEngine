@@ -53,7 +53,7 @@ public class King extends Piece {
     }
 
     @Override
-    public ArrayList<Move> getPossibleMoves(Table table) {
+    public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<Move>();
         // moves.addAll(generateKingMovesWithCastling(table));
 

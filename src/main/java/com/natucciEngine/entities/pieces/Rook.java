@@ -57,7 +57,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public ArrayList<Move> getPossibleMoves(Table table) {
+    public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<Move>();
         // moves.addAll(this.generateMovesToTheColumns(table, +1));
         // moves.addAll(this.generateMovesToTheColumns(table, -1));

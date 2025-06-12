@@ -16,8 +16,9 @@ public class Piece {
     private PiecesEnum piece;
     private int col, row;
     private boolean moved = false;
+    private boolean possibleMoves = false;
 
-    public ArrayList<Move> getPossibleMoves(Table table) {
+    public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<Move>();
         return moves;
     }

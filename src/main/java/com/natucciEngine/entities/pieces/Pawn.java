@@ -30,7 +30,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public ArrayList<Move> getPossibleMoves(Table table) {
+    public ArrayList<Move> generatePossibleMoves(Table table) {
         ArrayList<Move> moves = new ArrayList<>();
         Piece[][] board = table.getLocalTable();
 
