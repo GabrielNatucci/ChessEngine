@@ -3,6 +3,7 @@ package com.natucciEngine.utils;
 import com.natucciEngine.entities.Piece;
 import com.natucciEngine.entities.Table;
 import com.natucciEngine.enuns.PieceColorEnum;
+import com.natucciEngine.enuns.PiecesEnum;
 
 public class PrintTable {
     public static void main(Table table) {
@@ -31,5 +32,25 @@ public class PrintTable {
             System.out.print(letra + " ");
         }
         System.out.println();
+    }
+
+    public static void printAttacked(Table table) {
+        boolean[][][] localTable = table.getAttackedSquares();
+
+        System.out.println("  -------------------");
+        for (int i = 0; i < localTable.length; i++) {
+            System.out.print((i - 8) * -1 + " | ");
+
+            for (int j = 0; j < localTable.length; j++) {
+                if (localTable[i][j][PieceColorEnum.WHITE.getColorCode()] == false) {
+                    System.out.print("-");
+                } else {
+                    System.out.print("x");
+                }
+                System.out.print(" ");
+            }
+
+            System.out.println("|");
+        }
     }
 }

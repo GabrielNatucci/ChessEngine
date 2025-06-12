@@ -1,8 +1,11 @@
 package com.natucciEngine.enuns;
 
+import lombok.Getter;
+
+@Getter
 public enum PieceColorEnum {
-    WHITE(1, "WHITE"),
-    BLACK(2, "BLACK");
+    WHITE(0, "W"),
+    BLACK(1, "B");
 
     private int colorCode;
     private String color;
@@ -11,13 +14,4 @@ public enum PieceColorEnum {
         this.color = color;
         this.colorCode = colorCode;
     }
-
-    public String getColor() {
-        return color;
-    }
-
-    public int getColorCode() {
-        return colorCode;
-    }
-
 }

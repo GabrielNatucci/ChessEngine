@@ -18,7 +18,8 @@ public class Piece {
     private boolean moved = false;
 
     public ArrayList<Move> getPossibleMoves(Table table) {
-        return null;
+        ArrayList<Move> moves = new ArrayList<Move>();
+        return moves;
     }
 
     public Boolean isMoveValid(Table table, Move move) {
