@@ -1,9 +1,6 @@
 package com.natucciEngine.entities.pieces;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.natucciEngine.core.InputParser.Move;
 import com.natucciEngine.entities.Piece;
 import com.natucciEngine.entities.Table;

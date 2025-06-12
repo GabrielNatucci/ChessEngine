@@ -1,6 +1,7 @@
 package com.natucciEngine.entities.pieces;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import com.natucciEngine.core.InputParser.Move;
 import com.natucciEngine.entities.Piece;
@@ -49,12 +50,54 @@ public class Pawn extends Piece {
                 if (target != null && target.getColor() != this.getColor()) {
                     moves.add(new Move(row, col, nextRow, targetCol));
                 }
+
+                if (target == null) {
+                    direction = -1;
+                    if (this.getColor().equals(PieceColorEnum.WHITE) && this.getRow() == 3) {
+                        System.out.println(this.getRow() + " " + this.getCol());
+                    }
+
+                    if (this.getColor().equals(PieceColorEnum.WHITE)) {
+                        direction = +1;
+                    }
+
+                    Piece pawn = board[nextRow + direction][targetCol];
+                    if (pawn != null && !pawn.getColor().equals(this.getColor()) && pawn.isCapurableAnPassant()) {
+                        moves.add(new Move(row, col, nextRow, targetCol));
+                    }
+                }
             }
         }
 
-
         this.setPossibleMoves(moves);
         return moves;
+    }
+
+    @Override
+    public Boolean isMoveValid(Table table, Move move) {
+
+        /* isso aq é uma gambiarra TERRÍVEL!!!
+         * não vou  me dar ao trabalho de explicar aqui detalhadamente oq isso faz, 
+         * mas é basicamente para fazer a lógica da captura de passagem funcionar
+         */
+        Piece target = table.getLocalTable()[move.getToRow()][move.getToCol()];
+        if (target == null) {
+            int direction = -1;
+            if (this.getColor().equals(PieceColorEnum.WHITE)) {
+                direction = +1;
+            }
+
+            Piece pawn = table.getLocalTable()[move.getToRow() + direction][move.getToCol()];
+            if (pawn != null && !pawn.getColor().equals(this.getColor()) && pawn.isCapurableAnPassant()) {
+                table.getLocalTable()[move.getToRow() + direction][move.getToCol()] = null;
+            }
+        }
+
+        boolean isMoveValid = this.getPossibleMoves().stream().filter(movec -> {
+            return move.equals(movec);
+        }).collect(Collectors.toList()).size() == 1;
+
+        return isMoveValid;
     }
 
     private boolean isInsideBoard(int row, int col) {

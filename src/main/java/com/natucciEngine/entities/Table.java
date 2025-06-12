@@ -88,7 +88,6 @@ public class Table {
         return this.getAttackedSquares()[row][col][color.getColorCode()];
     }
 
-
     public Table(Piece[][] localTable) {
         this.localTable = localTable;
     }
@@ -103,9 +102,19 @@ public class Table {
         Piece targetPiece = getLocalTable()[move.getToRow()][move.getToCol()];
         boolean isTargetPieceSameColor = targetPiece == null || targetPiece.getColor() != piece.getColor();
 
-        if (turn.equals(piece.getColor()) && piece.isMoveValid(this, move) && isTargetPieceSameColor) {
+        if (piece != null && turn.equals(piece.getColor()) && piece.isMoveValid(this, move) && isTargetPieceSameColor) {
             piece.setCol(move.getToCol());
             piece.setRow(move.getToRow());
+            piece.setMoved(true);
+
+            // esse if tem uma execçao pro peão, que caso ele tenha se movido duas casas,
+            // vai ficar como se não tivesse se mexido ainda.
+            // isso é pra facilitar o an passant
+            if (piece.getPiece().equals(PiecesEnum.PAWN)) {
+                piece.setCapurableAnPassant(Math.abs(move.getFromRow() - move.getToRow()) == 2);
+            } else {
+                piece.setCapurableAnPassant(false);
+            }
 
             getLocalTable()[move.getFromRow()][move.getFromCol()] = null;
             getLocalTable()[move.getToRow()][move.getToCol()] = piece;

@@ -17,6 +17,7 @@ public class Piece {
     private PiecesEnum piece;
     private int col, row;
     private boolean moved = false;
+    private boolean isCapurableAnPassant = false;
     private ArrayList<Move> possibleMoves;
 
     public ArrayList<Move> generatePossibleMoves(Table table) {

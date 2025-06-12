@@ -22,7 +22,7 @@ public class Main {
         Move move;
         while (true) {
             while (true) {
-                PrintTable.printAttacked(table);
+                // PrintTable.printAttacked(table);
                 move = ChessInputParser.main();
                 if (getTable().handleMove(move, turn)) {
                     turn = turn.equals(PieceColorEnum.WHITE) ? PieceColorEnum.BLACK : PieceColorEnum.WHITE;
