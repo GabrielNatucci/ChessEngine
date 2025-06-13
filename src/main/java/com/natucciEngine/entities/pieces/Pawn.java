@@ -9,6 +9,9 @@ import com.natucciEngine.entities.Table;
 import com.natucciEngine.enuns.PieceColorEnum;
 import com.natucciEngine.enuns.PiecesEnum;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class Pawn extends Piece {
     public Pawn(PieceColorEnum color, int col, int row) {
         this.setPiece(PiecesEnum.PAWN);
@@ -53,9 +56,6 @@ public class Pawn extends Piece {
 
                 if (target == null) {
                     direction = -1;
-                    if (this.getColor().equals(PieceColorEnum.WHITE) && this.getRow() == 3) {
-                        System.out.println(this.getRow() + " " + this.getCol());
-                    }
 
                     if (this.getColor().equals(PieceColorEnum.WHITE)) {
                         direction = +1;
@@ -103,5 +103,4 @@ public class Pawn extends Piece {
     private boolean isInsideBoard(int row, int col) {
         return row >= 0 && row < Table.HEIGHT && col >= 0 && col < Table.LENGTH;
     }
-
 }

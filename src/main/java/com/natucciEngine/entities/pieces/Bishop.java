@@ -1,6 +1,7 @@
 package com.natucciEngine.entities.pieces;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import com.natucciEngine.core.InputParser.Move;
 import com.natucciEngine.entities.Piece;
@@ -8,6 +9,9 @@ import com.natucciEngine.entities.Table;
 import com.natucciEngine.enuns.PieceColorEnum;
 import com.natucciEngine.enuns.PiecesEnum;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class Bishop extends Piece {
     public Bishop(PieceColorEnum color, int row, int col) {
         this.setPiece(PiecesEnum.BISHOP);
@@ -23,6 +27,12 @@ public class Bishop extends Piece {
         moves.addAll(generateMovesToTheColumns(table, 1, -1));
         moves.addAll(generateMovesToTheColumns(table, -1, 1));
         moves.addAll(generateMovesToTheColumns(table, -1, -1));
+
+        moves = moves.stream()
+                .filter(move -> {
+                    return !move.equals(null);
+                })
+                .collect(Collectors.toCollection(ArrayList::new));
 
         this.setPossibleMoves(moves);
         return moves;
@@ -52,5 +62,4 @@ public class Bishop extends Piece {
 
         return moves;
     }
-
 }

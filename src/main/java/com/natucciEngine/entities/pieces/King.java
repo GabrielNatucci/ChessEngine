@@ -8,6 +8,9 @@ import com.natucciEngine.entities.Table;
 import com.natucciEngine.enuns.PieceColorEnum;
 import com.natucciEngine.enuns.PiecesEnum;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class King extends Piece {
     public King(PieceColorEnum color, int row, int col) {
         this.setPiece(PiecesEnum.KING);

@@ -7,7 +7,9 @@ import com.natucciEngine.entities.Piece;
 import com.natucciEngine.entities.Table;
 import com.natucciEngine.enuns.PieceColorEnum;
 import com.natucciEngine.enuns.PiecesEnum;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class Knight extends Piece {
     public Knight(PieceColorEnum color, int row, int col) {
         this.setPiece(PiecesEnum.KNIGHT);

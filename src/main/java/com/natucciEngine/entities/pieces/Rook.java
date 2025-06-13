@@ -7,6 +7,9 @@ import com.natucciEngine.entities.Table;
 import com.natucciEngine.enuns.PieceColorEnum;
 import com.natucciEngine.enuns.PiecesEnum;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class Rook extends Piece {
     public Rook(PieceColorEnum color, int row, int col) {
         this.setPiece(PiecesEnum.ROOK);
