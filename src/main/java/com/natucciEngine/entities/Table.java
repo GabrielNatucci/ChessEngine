@@ -1,5 +1,6 @@
 package com.natucciEngine.entities;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import com.natucciEngine.core.InputParser.Move;
 import com.natucciEngine.entities.pieces.Bishop;
@@ -21,6 +22,8 @@ public class Table {
     private Piece[][] localTable;
     private boolean[][][] attackedSquares;
     private ArrayList<Move> possible;
+    private ArrayList<Piece> whitePeople;
+    private ArrayList<Piece> blackPeople;
 
     public static King blackKing, whiteKing;
     public static final int HEIGHT = 8;
@@ -28,13 +31,17 @@ public class Table {
 
     public Table() {
         this.setLocalTable(new Piece[LENGTH][HEIGHT]);
-
+        this.setWhitePeople(new ArrayList<Piece>());
+        this.setBlackPeople(new ArrayList<Piece>());
     }
 
     public void initTable() {
         for (int i = 0; i < localTable.length; i++) {
             getLocalTable()[1][i] = new Pawn(PieceColorEnum.BLACK, i, 1);
+            this.getBlackPeople().add(getLocalTable()[1][i]);
+
             getLocalTable()[6][i] = new Pawn(PieceColorEnum.WHITE, i, 6);
+            this.getWhitePeople().add(getLocalTable()[6][i]);
         }
 
         setHeavyPiecesList(PieceColorEnum.BLACK);
@@ -63,7 +70,7 @@ public class Table {
         getLocalTable()[linha][3] = new Queen(color, linha, 3);
 
         King king = new King(color, linha, 4);
-        if(color.equals(PieceColorEnum.WHITE)) {
+        if (color.equals(PieceColorEnum.WHITE)) {
             Table.whiteKing = king;
         } else {
             Table.blackKing = king;
@@ -146,10 +153,12 @@ public class Table {
                 piece.setCapurableAnPassant(false);
             }
 
+
             getLocalTable()[move.getFromRow()][move.getFromCol()] = null;
             getLocalTable()[move.getToRow()][move.getToCol()] = piece;
 
             this.updateAttackedSquares();
+            this.cleanAnPassant(turn);
 
             return true;
         }
@@ -157,8 +166,22 @@ public class Table {
         return false;
     }
 
+    private void cleanAnPassant(PieceColorEnum color) {
+        ArrayList<Piece> pieces = new ArrayList<Piece>();
+
+        if (color.equals(PieceColorEnum.WHITE)) {
+            pieces = getBlackPeople();
+        } else {
+            pieces = getWhitePeople();
+        }
+
+        for (Piece piece : pieces) {
+            piece.setCapurableAnPassant(false);
+        }
+    }
+
     @Override
-    public Table clone() { 
+    public Table clone() {
         Table table = new Table();
 
         for (int i = 0; i < HEIGHT; i++) {
