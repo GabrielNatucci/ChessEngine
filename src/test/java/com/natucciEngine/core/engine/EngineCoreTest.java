@@ -20,10 +20,14 @@ public class EngineCoreTest {
             long inicio = System.currentTimeMillis();
             long moves = engine.countMoves(table, PieceColorEnum.WHITE, i);
             long fim = System.currentTimeMillis();
-            System.out.println(i + ": " + moves + " TOOK: " + (fim - inicio) + "ms, esperado: " + expectedMoves[i - 1]);
 
-            // assertEquals(expectedMoves[i - 1], moves, "Falha na profundidade " + i + ":
-            // esperado=" + expectedMoves[i - 1] + ", obtido=" + moves);
+            if (moves == expectedMoves[i-1]) {
+                System.out.println("OK - " + i + ": " + moves + " TOOK: " + (fim - inicio) + "ms, esperado: " + expectedMoves[i - 1]);
+            } else {
+                System.out.println("Er - " + i + ": " + moves + " TOOK: " + (fim - inicio) + "ms, esperado: " + expectedMoves[i - 1]);
+            }
+
+            // assertEquals(expectedMoves[i - 1], moves, "Falha na profundidade " + i + ": esperado=" + expectedMoves[i - 1] + ", obtido=" + moves);
             assertEquals(true, true);
         }
     }

@@ -41,7 +41,7 @@ public class PrintTable {
             System.out.print((i - 8) * -1 + " | ");
 
             for (int j = 0; j < localTable.length; j++) {
-                if (localTable[i][j][PieceColorEnum.BLACK.getColorCode()] == false) {
+                if (localTable[i][j][PieceColorEnum.WHITE.getColorCode()] == false) {
                     System.out.print("-");
                 } else {
                     System.out.print("x");

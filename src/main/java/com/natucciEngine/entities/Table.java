@@ -24,13 +24,16 @@ public class Table {
     private ArrayList<Move> possible;
     private ArrayList<Piece> whitePeople;
     private ArrayList<Piece> blackPeople;
+    private ArrayList<Piece> whitePieces;
+    private ArrayList<Piece> blackPieces;
 
-    public static King blackKing, whiteKing;
+    private King blackKing, whiteKing;
     public static final int HEIGHT = 8;
     public static final int LENGTH = 8;
 
     public Table() {
         this.setLocalTable(new Piece[LENGTH][HEIGHT]);
+        this.setAttackedSquares(new boolean[LENGTH][HEIGHT][2]);
         this.setWhitePeople(new ArrayList<Piece>());
         this.setBlackPeople(new ArrayList<Piece>());
     }
@@ -44,12 +47,17 @@ public class Table {
             this.getWhitePeople().add(getLocalTable()[6][i]);
         }
 
-        setHeavyPiecesList(PieceColorEnum.BLACK);
-        setHeavyPiecesList(PieceColorEnum.WHITE);
+        this.getWhitePeople().addAll(this.getWhitePeople());
+        this.getWhitePieces().addAll(setHeavyPiecesList(PieceColorEnum.WHITE));
+
+        this.getBlackPieces().addAll(this.getBlackPeople());
+        this.getBlackPieces().addAll(setHeavyPiecesList(PieceColorEnum.BLACK));
+
         this.updateAttackedSquares();
     }
 
-    private void setHeavyPiecesList(PieceColorEnum color) {
+    private ArrayList<Piece> setHeavyPiecesList(PieceColorEnum color) {
+        ArrayList<Piece> pieces = new ArrayList<Piece>();
         int linha = 0;
 
         if (color.equals(PieceColorEnum.BLACK)) {
@@ -58,25 +66,28 @@ public class Table {
             linha = 7;
         }
 
-        getLocalTable()[linha][7] = new Rook(color, linha, 7);
-        getLocalTable()[linha][0] = new Rook(color, linha, 0);
-
-        getLocalTable()[linha][1] = new Knight(color, linha, 1);
-        getLocalTable()[linha][6] = new Knight(color, linha, 6);
-
-        getLocalTable()[linha][2] = new Bishop(color, linha, 2);
-        getLocalTable()[linha][5] = new Bishop(color, linha, 5);
-
-        getLocalTable()[linha][3] = new Queen(color, linha, 3);
-
         King king = new King(color, linha, 4);
+
+        getLocalTable()[linha][0] = new Rook(color, linha, 0);
+        getLocalTable()[linha][1] = new Knight(color, linha, 1);
+        getLocalTable()[linha][2] = new Bishop(color, linha, 2);
+        getLocalTable()[linha][3] = new Queen(color, linha, 3);
+        getLocalTable()[linha][4] = king;
+        getLocalTable()[linha][5] = new Bishop(color, linha, 5);
+        getLocalTable()[linha][6] = new Knight(color, linha, 6);
+        getLocalTable()[linha][7] = new Rook(color, linha, 7);
+
         if (color.equals(PieceColorEnum.WHITE)) {
-            Table.whiteKing = king;
+            this.setWhiteKing(king);
         } else {
-            Table.blackKing = king;
+            this.setBlackKing(king);
         }
 
-        getLocalTable()[linha][4] = king;
+        for (int i = 0; i < Table.LENGTH; i++) {
+            pieces.add(getLocalTable()[linha][i]);
+        }
+
+        return pieces;
     }
 
     public void updateAttackedSquares() {
@@ -116,7 +127,28 @@ public class Table {
             }
         }
 
-        return moves;
+        ArrayList<Move> movesFr = new ArrayList<Move>();
+        for (Move move : moves) {
+            Table table = this.clone();
+            table.handleMove(move, color);
+
+            King king = new King();
+
+            PieceColorEnum tmpColor = PieceColorEnum.WHITE;
+            if (color == PieceColorEnum.WHITE) {
+                tmpColor = PieceColorEnum.BLACK;
+                king = table.getWhiteKing();
+            } else {
+                king = table.getBlackKing();
+            }
+
+            if (!table.getAttackedSquares()[king.getRow()][king.getCol()][tmpColor.getColorCode()]) {
+                movesFr.add(move);
+            }
+
+        }
+
+        return movesFr;
     }
 
     public boolean isSquareAttacked(int row, int col, PieceColorEnum color) {
@@ -153,7 +185,6 @@ public class Table {
                 piece.setCapurableAnPassant(false);
             }
 
-
             getLocalTable()[move.getFromRow()][move.getFromCol()] = null;
             getLocalTable()[move.getToRow()][move.getToCol()] = piece;
 
@@ -188,7 +219,18 @@ public class Table {
             for (int j = 0; j < LENGTH; j++) {
                 if (this.getLocalTable()[i][j] != null) {
                     Piece piece = this.getLocalTable()[i][j];
+
                     table.getLocalTable()[i][j] = piece.copyPiece(piece);
+                    table.getLocalTable()[i][j] = piece.copyPiece(piece);
+
+                    if (piece.getPiece().equals(PiecesEnum.KING)) {
+                        if (piece.getColor().equals(PieceColorEnum.WHITE)) {
+                            table.setWhiteKing((King) table.getLocalTable()[i][j]);
+                        } else {
+                            table.setBlackKing((King) table.getLocalTable()[i][j]);
+                        }
+                    }
+
                 }
             }
         }
